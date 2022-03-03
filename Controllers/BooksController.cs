@@ -1,59 +1,112 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LibApp.Models;
+﻿using LibApp.Models;
+using LibApp.Repositories;
 using LibApp.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace LibApp.Controllers
 {
     public class BooksController : Controller
     {
-        public IActionResult Random()
+        private readonly IBooksRepository _booksRepository;
+        private readonly IGenreRepository _genreRepository;
+
+        public BooksController(IBooksRepository booksRepository, IGenreRepository genreRepository)
         {
-            var firstBook = new Book() { Name = "English dictionary" };
-
-            var customers = new List<Customer>
-            {
-                new Customer {Name = "Customer 1"},
-                new Customer {Name = "Customer 2"}
-            };
-
-            var viewModel = new RandomBookViewModel
-            {
-                Book = firstBook,
-                Customers = customers
-            };
-            
-            return View(viewModel);
-        }
-
-        public IActionResult Edit(int bookId)
-        {
-            return Content("id=" + bookId);
+            _booksRepository = booksRepository;
+            _genreRepository = genreRepository;
         }
 
         public IActionResult Index()
         {
-            var books = GetBooks();
-            
+            var books = _booksRepository.GetBooksWithGenre();
+
             return View(books);
         }
-        
-        [Route("books/released/{year:regex(^\\d{{4}}$)}/{month:range(1, 12)}")]
-        public IActionResult ByReleaseDate(int year, int month)
+
+        public IActionResult Details(int id)
         {
-            return Content(year + "/" + month);
+            var book = _booksRepository.GetBookWithGenre(id);
+
+            if (book == null)
+            {
+                return Content("Book not found");
+            }
+
+            return View(book);
         }
 
-        private IEnumerable<Book> GetBooks()
+        public IActionResult Edit(int id)
         {
-            return new List<Book>
+            var book = _booksRepository.GetBookOrDefault(id);
+            if (book == null)
             {
-                new Book {Id = 1, Name = "Hamlet"},
-                new Book {Id = 2, Name = "Ulysses"}
+                return NotFound();
+            }
+
+            var viewModel = new BookFormViewModel
+            {
+                Book = book,
+                Genres = _genreRepository.GetGenres()
             };
+
+            return View("BookForm", viewModel);
         }
+
+        public IActionResult New()
+        {
+            var viewModel = new BookFormViewModel
+            {
+                Genres = _genreRepository.GetGenres()
+            };
+
+            return View("BookForm", viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Save(Book book)
+        {
+            var errorViewModel = new BookFormViewModel
+            {
+                Book = book,
+                Genres = _genreRepository.GetGenres()
+            };
+
+            if (!ModelState.IsValid)
+            {
+                return View("BookForm", errorViewModel);
+            }
+
+            if (book.Id == 0)
+            {
+                book.DateAdded = DateTime.Now;
+                _booksRepository.AddBook(book);
+            }
+            else
+            {
+                var bookInDb = _booksRepository.GetBook(book.Id);
+                bookInDb.Name = book.Name;
+                bookInDb.AuthorName = book.AuthorName;
+                bookInDb.GenreId = book.GenreId;
+                bookInDb.NumberInStock = book.NumberInStock;
+                bookInDb.ReleaseDate = book.ReleaseDate;
+                bookInDb.DateAdded = book.DateAdded;
+            }
+
+            try
+            {
+                _booksRepository.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return RedirectToAction("Index", "Books");
+        }
+
+
+
     }
 }

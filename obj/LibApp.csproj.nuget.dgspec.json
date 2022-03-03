@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Karol\\source\\repos\\LibApp KB\\LibApp.csproj": {}
+    "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\LibApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Karol\\source\\repos\\LibApp KB\\LibApp.csproj": {
+    "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\LibApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Karol\\source\\repos\\LibApp KB\\LibApp.csproj",
+        "projectUniqueName": "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\LibApp.csproj",
         "projectName": "LibApp",
-        "projectPath": "C:\\Users\\Karol\\source\\repos\\LibApp KB\\LibApp.csproj",
+        "projectPath": "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\LibApp.csproj",
         "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Karol\\source\\repos\\LibApp KB\\obj\\",
+        "outputPath": "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -44,6 +44,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Bootbox.JS": {
+              "target": "Package",
+              "version": "[5.5.2, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.9, )"
@@ -67,6 +75,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[5.0.9, )"
+            },
+            "datatables.net": {
+              "target": "Package",
+              "version": "[1.11.5, )"
             }
           },
           "imports": [
