@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\LibApp.csproj": {}
+    "C:\\Users\\Karol\\Source\\Repos\\LibApp23\\LibApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\LibApp.csproj": {
+    "C:\\Users\\Karol\\Source\\Repos\\LibApp23\\LibApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\LibApp.csproj",
+        "projectUniqueName": "C:\\Users\\Karol\\Source\\Repos\\LibApp23\\LibApp.csproj",
         "projectName": "LibApp",
-        "projectPath": "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\LibApp.csproj",
+        "projectPath": "C:\\Users\\Karol\\Source\\Repos\\LibApp23\\LibApp.csproj",
         "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Karol\\Source\\Repos\\LibApp1\\obj\\",
+        "outputPath": "C:\\Users\\Karol\\Source\\Repos\\LibApp23\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -46,11 +46,15 @@
           "dependencies": {
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[11.0.0, )"
+              "version": "[8.1.1, )"
             },
             "Bootbox.JS": {
               "target": "Package",
               "version": "[5.5.2, )"
+            },
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.2.7, )"
             },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
@@ -78,7 +82,11 @@
             },
             "datatables.net": {
               "target": "Package",
-              "version": "[1.11.5, )"
+              "version": "[1.11.3, )"
+            },
+            "twitter.typeahead": {
+              "target": "Package",
+              "version": "[0.11.1, )"
             }
           },
           "imports": [
